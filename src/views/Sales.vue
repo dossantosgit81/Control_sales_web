@@ -69,20 +69,21 @@
         </div>
     <div :class="{modal: true, 'is-active': showModalPayment}">
         <div class="modal-background"></div>
-        <div class="modal-content" style="overflow: hidden;">
+        <div class="modal-content spacing" style="overflow: hidden;">
             <div class="columns">
                 <div class="column p-5">
-                    <p>Dinheiro</p>
+                    <p class="is-white">Dinheiro</p>
                     <input type="number" class="input" placeholder="Dinheiro" v-model="money">
-                    <p>Cartão</p>
+                    <p class="is-white">Cartão</p>
                     <input type="number" class="input" placeholder="Cartão" v-model="card">
-                    <p>Cheque</p>
+                    <p class="is-white">Cheque</p>
                     <input type="number" class="input" placeholder="Cheque" v-model="check">
-                     <p>Troco</p>
+                     <p class="is-white">Troco</p>
                     <input type="number" class="input" placeholder="Troco" disabled v-model="changeOfSale">
-                     <p>Total da venda</p>
+                     <p class="is-white">Total da venda</p>
                     <input type="number" class="input" placeholder="Total da Venda" disabled v-model="total">
-                    <textarea v-model="obs" id="" cols="30" rows="10"></textarea>
+                    <p class="is-white">Observações</p>
+                    <textarea class="textarea is-primary" v-model="obs" id="" cols="15" rows="5"></textarea>
                     <button class="button is-primary mt-3" @click="finalizeSale()">Finalizar Compra</button>
                 </div>>
             </div>
@@ -117,7 +118,7 @@ export default {
             card: 0.0,
             check: 0.0,
             changeOfSale: 0.0,
-            obs: ''
+            obs: '',
         }
     },
     methods:{
@@ -132,6 +133,7 @@ export default {
                 cpf: this.cpf
             }).then(res=>{
               this.name = res.data[0].name;
+              this.idClient = res.data[0].id;
             }).catch(err=>{
                 console.log(err);
             });
@@ -174,11 +176,46 @@ export default {
             let totalPaid = parseFloat(this.money) + parseFloat(this.card)+ parseFloat(this.check);
             this.changeOfSale = totalPaid - this.total;
 
+           
+
+            axios.post("http://localhost:5000/sales", {
+                client: this.idClient,
+                total_sale: this.total,
+                obs: this.obs
+            }).then(res=>{
+                console.log(res);
+                axios.get("http://localhost:5000/lastid").then(res=>{
+                this.cart.forEach(product=>{
+                    axios.post("http://localhost:5000/cart", {
+                        sale_id : res.data.idSale,
+                        product_id: product.codigo,
+                        qtd: product.qtd,
+                        subtotal: product.subtotal
+                    }).then(res=>{
+                        console.log(res);
+                        this.$router.push({name: 'Home'});
+                    }).catch(err=>{
+                        console.log(err);
+                    });
+                    console.log(product);
+                })
+
+            }).catch(err=>{
+                console.log(err);
+            });
+            }).catch(err=>{
+                console.log(err);
+            });
         }
     }
 }
 </script>
 
 <style scoped>
-
+.spacing{
+    padding:50px;
+}   
+.is-white{
+    color:white;
+}
 </style>
