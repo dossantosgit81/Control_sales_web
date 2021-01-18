@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Client from '../views/Client.vue'
 import Sales from '../views/Sales.vue'
+import HistorySales from '../views/HistorySales.vue'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,11 @@ const routes = [
     name: 'Sales',
     component: Sales
 
+  },
+  {
+    path: '/history/sales',
+    name: 'HistorySales',
+    component: HistorySales
   },
   {
     path: '/about',
