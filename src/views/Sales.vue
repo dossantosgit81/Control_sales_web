@@ -183,9 +183,27 @@ export default {
                 total_sale: this.total,
                 obs: this.obs
             }).then(res=>{
-                console.log(res);
+                console.log("Inutil "+res);
                 axios.get("http://localhost:5000/lastid").then(res=>{
                 this.cart.forEach(product=>{
+                   let qtd_current, qtd_purchased, qtd_update;
+                    console.log(product.codigo);
+                    axios.get(`http://localhost:5000/stock/${product.codigo}`).then(res=>{
+                       qtd_current = res.data.result[0].quantity_stock;
+                       qtd_purchased = this.qtd;
+                       qtd_update = parseFloat(qtd_current) - parseFloat(qtd_purchased);
+                       axios.put("http://localhost:5000/stock", {
+                           id: product.codigo,
+                           qtd_new: qtd_update
+                       }).then(res=>{
+                           console.log(res);
+                       }).catch(err=>{
+                           console.log(err);
+                       })
+
+                    }).catch(err=>{
+                        console.log(err);
+                    })
                     axios.post("http://localhost:5000/cart", {
                         sale_id : res.data.idSale,
                         product_id: product.codigo,
