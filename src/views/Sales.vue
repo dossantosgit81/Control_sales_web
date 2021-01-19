@@ -1,6 +1,7 @@
 <template>
-    <div class="container">      
+<div>
         <h2 class="notification is-info">Cadastro de Vendas</h2>
+    <div class="container">      
         <hr>       
         <h3>Dados do Cliente</h3>
         <hr>
@@ -69,7 +70,7 @@
         </div>
     <div :class="{modal: true, 'is-active': showModalPayment}">
         <div class="modal-background"></div>
-        <div class="modal-content spacing" style="overflow: hidden;">
+        <div class="modal-content" style="overflow: hidden;">
             <div class="columns">
                 <div class="column p-5">
                     <p class="is-white">Dinheiro</p>
@@ -90,7 +91,8 @@
         </div>
         <button class="modal-close is-large" @click="hideModal()"></button>
     </div>
-    </div><!--Div pai-->
+    </div>
+</div><!--Div pai de todos-->
 </template>
 
 <script>
@@ -230,9 +232,6 @@ export default {
 </script>
 
 <style scoped>
-.spacing{
-    padding:50px;
-}   
 .is-white{
     color:white;
 }

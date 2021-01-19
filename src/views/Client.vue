@@ -1,7 +1,7 @@
 <template>
-
-    <div class="container is-max-desktop">
+<div>
         <h1 class="my-4">Cadastro de clientes</h1>
+    <div class="container is-max-desktop">
         <div v-if="error != undefined">
             <div class="notification is-danger">{{error}}</div>
         </div>
@@ -95,7 +95,7 @@
                 </tbody>
             </table>
     </div><!--Div pai de todos-->
-
+</div>
 </template>
 
 <script>
