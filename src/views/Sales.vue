@@ -213,7 +213,7 @@ export default {
                         subtotal: product.subtotal
                     }).then(res=>{
                         console.log(res);
-                        this.$router.push({name: 'Home'});
+                        this.$router.push({name: 'HistorySales'});
                     }).catch(err=>{
                         console.log(err);
                     });

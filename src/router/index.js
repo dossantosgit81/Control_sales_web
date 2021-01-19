@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Client from '../views/Client.vue'
 import Sales from '../views/Sales.vue'
 import HistorySales from '../views/HistorySales.vue'
+import DetailSales from '../views/DetailSales.vue'
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,11 @@ const routes = [
     path: '/history/sales',
     name: 'HistorySales',
     component: HistorySales
+  },
+  {
+    path: '/detail/sales/:datas',
+    name: 'DetailSales',
+    component: DetailSales
   },
   {
     path: '/about',
