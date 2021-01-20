@@ -5,6 +5,7 @@ import Client from '../views/Client.vue'
 import Sales from '../views/Sales.vue'
 import HistorySales from '../views/HistorySales.vue'
 import DetailSales from '../views/DetailSales.vue'
+import TotalSale from '../views/TotalSale.vue'
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,11 @@ const routes = [
     path: '/detail/sales/:datas',
     name: 'DetailSales',
     component: DetailSales
+  },
+    {
+    path: '/total/date',
+    name: 'TotalSale',
+    component: TotalSale
   },
   {
     path: '/about',

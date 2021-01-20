@@ -35,9 +35,6 @@
 
              </tbody>
          </table>
-         <div class="control ml-6 ">
-            <button class="button is-primary">Emitir relatório</button>
-         </div>
      </div>
  </div>
     
